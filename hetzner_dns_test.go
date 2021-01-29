@@ -33,7 +33,7 @@ func TestClient_GetZones(t *testing.T) {
     {
       "id": "sample-id",
       "created": "2021-01-28T14:23:31Z",
-      "modified": "2021-01-28T14:23:31Z",
+      "modified": "2020-06-24 17:00:38.423 +0000 UTC",
       "legacy_dns_host": "legacy-dns-host",
       "legacy_ns": [
         "legacy-ns-1"
@@ -74,6 +74,7 @@ func TestClient_GetZones(t *testing.T) {
 		t.Error("Expected error to be non-nil")
 	}
 	if !errors.Is(err, hetzner_dns.ErrAPIKeyNotSet) {
+		log.Printf("err:%v", err)
 		t.Error("Expected ErrAPIKeyNotSet")
 	}
 

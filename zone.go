@@ -1,7 +1,5 @@
 package hetzner_dns
 
-import "time"
-
 type Pagination struct {
 	Page         int `json:"page"`
 	PerPage      int `json:"per_page"`
@@ -14,23 +12,23 @@ type Meta struct {
 }
 
 type Zone struct {
-	ID              string    `json:"id"`
-	Created         time.Time `json:"created"`
-	Modified        time.Time `json:"modified"`
-	LegacyDNSHost   string    `json:"legacy_dns_host"`
-	LegacyNs        []string  `json:"legacy_ns"`
-	Name            string    `json:"name"`
-	Ns              []string  `json:"ns"`
-	Owner           string    `json:"owner"`
-	Paused          bool      `json:"paused"`
-	Permission      string    `json:"permission"`
-	Project         string    `json:"project"`
-	Registrar       string    `json:"registrar"`
-	Status          string    `json:"status"`
-	TTL             int       `json:"ttl"`
-	Verified        time.Time `json:"verified"`
-	RecordsCount    int       `json:"records_count"`
-	IsSecondaryDNS  bool      `json:"is_secondary_dns"`
+	ID              string      `json:"id"`
+	Created         HetznerTime `json:"created"`
+	Modified        HetznerTime `json:"modified"`
+	LegacyDNSHost   string      `json:"legacy_dns_host"`
+	LegacyNs        []string    `json:"legacy_ns"`
+	Name            string      `json:"name"`
+	Ns              []string    `json:"ns"`
+	Owner           string      `json:"owner"`
+	Paused          bool        `json:"paused"`
+	Permission      string      `json:"permission"`
+	Project         string      `json:"project"`
+	Registrar       string      `json:"registrar"`
+	Status          string      `json:"status"`
+	TTL             int         `json:"ttl"`
+	Verified        HetznerTime `json:"verified"`
+	RecordsCount    int         `json:"records_count"`
+	IsSecondaryDNS  bool        `json:"is_secondary_dns"`
 	TxtVerification struct {
 		Name  string `json:"name"`
 		Token string `json:"token"`

@@ -1,7 +1,5 @@
 package hetzner_dns
 
-import "time"
-
 type RecordRequest struct {
 	ID     string `json:"id,omitempty"`
 	ZoneID string `json:"zone_id"`
@@ -16,14 +14,14 @@ type BulkRecordRequest struct {
 }
 
 type Record struct {
-	Type     string    `json:"type"`
-	ID       string    `json:"id"`
-	Created  time.Time `json:"created"`
-	Modified time.Time `json:"modified"`
-	ZoneID   string    `json:"zone_id"`
-	Name     string    `json:"name"`
-	Value    string    `json:"value"`
-	TTL      int       `json:"ttl"`
+	Type     string      `json:"type"`
+	ID       string      `json:"id"`
+	Created  HetznerTime `json:"created"`
+	Modified HetznerTime `json:"modified"`
+	ZoneID   string      `json:"zone_id"`
+	Name     string      `json:"name"`
+	Value    string      `json:"value"`
+	TTL      int         `json:"ttl"`
 }
 
 type RecordResponse struct {
