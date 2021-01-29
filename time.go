@@ -30,7 +30,7 @@ func (hzTime *HetznerTime) MarshalJSON() ([]byte, error) {
 	if hzTime == nil {
 		return []byte("null"), nil
 	}
-	return json.Marshal(hzTime)
+	return json.Marshal((*time.Time)(hzTime))
 }
 
 func (hzTime *HetznerTime) UnmarshalJSON(b []byte) error {
