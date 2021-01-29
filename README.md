@@ -19,7 +19,8 @@ environment variable `HETZNER_API_KEY`.
 
 ### API
 
-Almost all Hetzner DNS APIs are supported. See `hetzner_dns_test.go` for a complete list.
+Almost all Hetzner DNS APIs are supported. See the example in `cmd/example` or
+the tests in `hetzner_dns_test.go` for a more complete list.
 
 ```go
 import "github.com/panta/go-hetzner-dns"
@@ -46,6 +47,22 @@ if err != nil {
 It's possible to use a custom `http.Client` object by setting the
 `HttpClient` field in the `Client` object. If not set, the library
 will create one for you.
+
+### Example program
+
+To build the example program on a unix-like:
+
+```shell
+$ make
+```
+
+then:
+
+```shell
+$ export HETZNER_API_KEY="....."
+$ ./go-hetzner-dns list
+$ ./go-hetzner-dns add-record -zone=ZONEID RECORD_NAME TYPE RECORD_VALUE
+```
 
 ## Author
 
