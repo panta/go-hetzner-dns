@@ -205,6 +205,7 @@ func (client *Client) CreateOrUpdateRecord(ctx context.Context, record RecordReq
 		}
 	}
 	if foundRecord != nil {
+		record.ID = foundRecord.ID
 		return client.UpdateRecord(ctx, record)
 	}
 	return client.CreateRecord(ctx, record)
