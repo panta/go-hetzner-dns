@@ -180,7 +180,7 @@ func (client *Client) UpdateRecord(ctx context.Context, record RecordRequest) (*
 	}
 	recordResponse := RecordResponse{}
 	endpoint := fmt.Sprintf("/records/%v", record.ID)
-	err := client.Perform(ctx, http.MethodPut, endpoint, nil, nil, &recordResponse)
+	err := client.Perform(ctx, http.MethodPut, endpoint, nil, &record, &recordResponse)
 	return &recordResponse, err
 }
 
