@@ -15,6 +15,7 @@ func usage() {
 	fmt.Println("SUBCOMMANDS:")
 	fmt.Println("  list")
 	fmt.Println("  add-record -zone ZONE-ID NAME TYPE VALUE")
+	fmt.Println("  update-record -zone ZONE-ID NAME TYPE VALUE")
 }
 
 func main() {
@@ -25,6 +26,9 @@ func main() {
 	// addRecordName := addRecordCmd.String("name", "", "record name")
 	// addRecordType := addRecordCmd.String("type", "", "record type")
 	// addRecordValue := addRecordCmd.String("value", "", "record value")
+
+	updateRecordCmd := flag.NewFlagSet("update-record", flag.ExitOnError)
+	updateRecordZone := updateRecordCmd.String("zone", "", "zone id")
 
 	if len(os.Args) < 2 {
 		fmt.Println("ERROR: expected a subcommand")
@@ -42,6 +46,12 @@ func main() {
 	case "add-record":
 		_ = addRecordCmd.Parse(os.Args[2:])
 		cmdAddRecord(addRecordCmd, *addRecordZone)
+
+	case "update":
+		fallthrough
+	case "update-record":
+		_ = updateRecordCmd.Parse(os.Args[2:])
+		cmdUpdateRecord(updateRecordCmd, *updateRecordZone)
 
 	default:
 		fmt.Println("ERROR: expected a subcommand")
@@ -116,6 +126,34 @@ func cmdAddRecord(flagSet *flag.FlagSet, zoneId string) {
 	}
 	fmt.Println("OK.")
 	fmt.Printf("Created: %v\n", recordResponse.Record)
+}
+
+func cmdUpdateRecord(flagSet *flag.FlagSet, zoneId string) {
+	client := hetzner_dns.Client{}
+
+	args := flagSet.Args()
+	if len(args) < 3 {
+		log.Println(args)
+		log.Println("ERROR: too few arguments to 'update-record' (expected NAME TYPE VALUE)")
+		usage()
+		os.Exit(1)
+	}
+
+	recordName := args[0]
+	recordType := args[1]
+	recordValue := args[2]
+	recordResponse, err := client.CreateOrUpdateRecord(context.Background(), hetzner_dns.RecordRequest{
+		ZoneID: zoneId,
+		Type:   recordType,
+		Name:   recordName,
+		Value:  recordValue,
+	})
+	if err != nil {
+		log.Printf("FAILED: %v", err)
+		os.Exit(1)
+	}
+	fmt.Println("OK.")
+	fmt.Printf("Created/Updated: %v\n", recordResponse.Record)
 }
 
 func repeatStr(str string, count int) string {

@@ -62,6 +62,7 @@ then:
 $ export HETZNER_API_KEY="....."
 $ ./go-hetzner-dns list
 $ ./go-hetzner-dns add-record -zone=ZONEID RECORD_NAME TYPE RECORD_VALUE
+$ ./go-hetzner-dns update-record -zone=ZONEID RECORD_NAME TYPE RECORD_VALUE
 ```
 
 ## Author
